@@ -10,7 +10,10 @@ const EVENTS_ENDPOINT = "https://gameinfo.albiononline.com/api/gameinfo/events";
 let event = null;
 fs.readFile("./debug/testEvent.js", (err, data) => {
   if (err) return;
-  event = JSON.parse(data)[0];
+  const index = Math.round(Math.random() * 51);
+  // const index = 32;
+  event = JSON.parse(data)[index];
+  console.log(`Index chosen: ${index}`);
 });
 
 app.get("/", async (req, res) => {
