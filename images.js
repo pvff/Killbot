@@ -6,6 +6,7 @@ const moment = require("moment");
 const { createCanvas, registerFont, loadImage } = require("canvas");
 const logger = require("./logger")("images");
 const { sleep, digitsFormatter, fileSizeFormatter } = require("./utils");
+const proxy = require("proxy-agent");
 
 registerFont(path.join(__dirname, "assets", "fonts", "Roboto-Regular.ttf"), {
   family: "Roboto",
@@ -47,6 +48,7 @@ if (process.env.AWS_ACCESS_KEY && process.env.AWS_SECRET_KEY) {
     maxRetries: 3,
     httpOptions: {
       timeout: 60000,
+      agent: proxy(process.env.http_proxy),
     },
   });
 }
